@@ -26,8 +26,17 @@ export function TodoList({
   onEdit,
   onDelete,
 }: TodoListProps) {
+
+const completedCount = todos.filter((todo) => todo.completed).length
+const activeCount = todos.length - completedCount
+
   return (
     <section aria-label="Task list">
+    {!loading && !failed && (
+      <Text muted size="small" aria-live="polite">
+        Tasks shown: {todos.length} · To do: {activeCount} · Completed: {completedCount}
+      </Text>
+    )}
       {loading ? (
         <Card>
           <Text role="status">Loading your tasks…</Text>
